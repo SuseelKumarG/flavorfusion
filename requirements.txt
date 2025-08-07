@@ -1,5 +1,5 @@
-torch==2.3.0
-torchvision==0.18.0
+torch
+torchvision
 streamlit==1.29.0
-pillow==10.2.0
-matplotlib==3.8.2
+pillow
+matplotlib
