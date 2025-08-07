@@ -4,8 +4,8 @@ import torch.nn as nn
 import torchvision.transforms as transforms
 from PIL import Image
 import os
+import matplotlib.pyplot as plt
 
-# Define the ComplexNet class (same as in training)
 class ComplexNet(nn.Module):
     def __init__(self, num_classes):
         super(ComplexNet, self).__init__()
@@ -92,7 +92,6 @@ class ComplexNet(nn.Module):
         out = self.classifier(out)
         return out
 
-# Define class names (same as training dataset)
 class_names = [
     'apple', 'banana', 'beetroot', 'cabbage', 'capsicum', 'carrot', 'cauliflower',
     'chilli pepper', 'cinnamon', 'cloves', 'corn', 'corriander', 'corriander_seeds',
@@ -104,8 +103,6 @@ class_names = [
 ]
 
 
- # <-- Replace with your actual class list
-
 @st.cache_resource
 def load_model():
     model = ComplexNet(num_classes=len(class_names))
@@ -113,10 +110,8 @@ def load_model():
     model.eval()
     return model
 
-# Load model once
 model = load_model()
 
-# Define transform
 transform = transforms.Compose([
     transforms.Resize((100, 100)),
     transforms.ToTensor(),
@@ -124,18 +119,14 @@ transform = transforms.Compose([
                          [0.229, 0.224, 0.225])
 ])
 
-# UI
 st.title("🍉 Fruit & Veggie Classifier")
 uploaded_file = st.file_uploader("Upload an image...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file).convert("RGB")
-    st.image(image, caption="Uploaded Image", use_column_width=True)
-
-    # Preprocess
+    st.image(image, caption="Uploaded Image")
     input_tensor = transform(image).unsqueeze(0)
 
-    # Predict
     with torch.no_grad():
         outputs = model(input_tensor)
         probabilities = torch.nn.functional.softmax(outputs, dim=1)[0]
@@ -146,4 +137,16 @@ if uploaded_file is not None:
         label = class_names[top5_indices[i].item()]
         prob = top5_prob[i].item() * 100
         st.write(f"**{label}**: {prob:.2f}%")
+    st.subheader("📊 Probability Across All Classes")
+    all_probs = probabilities.numpy()
+    sorted_indices = all_probs.argsort()[::-1]
+    sorted_probs = all_probs[sorted_indices]
+    sorted_labels = [class_names[i] for i in sorted_indices]
 
+    fig, ax = plt.subplots(figsize=(10, 18))
+    ax.barh(sorted_labels, sorted_probs, color='skyblue')
+    ax.invert_yaxis()
+    ax.set_xlabel("Probability")
+    ax.set_title("Class Probabilities")
+
+    st.pyplot(fig)
