@@ -118,7 +118,7 @@ transform = transforms.Compose([
                          [0.229, 0.224, 0.225])
 ])
 
-st.title("🍉 Fruit & Veggie Classifier")
+st.title("🍉🥒 Ingredient Classifier")
 uploaded_file = st.file_uploader("Upload an image...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
