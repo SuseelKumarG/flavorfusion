@@ -24,7 +24,7 @@ Try FlavorFusion online: [https://flavourfusionmodel.streamlit.app/](https://fla
 
 1. Clone this repository:
     ```sh
-    git clone https://github.com/yourusername/flavorfusion.git
+    git clone https://github.com/SuseelKumarG/flavorfusion.git
     cd flavorfusion
     ```
 
