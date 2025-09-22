@@ -13,6 +13,12 @@ Try FlavorFusion online: [https://flavourfusionmodel.streamlit.app/](https://fla
 - Visualizes probability distribution across all classes
 - Easy-to-use Streamlit web interface
 
+## Model Performance
+
+- Achieved high accuracy on the test set, with robust generalization across 40+ ingredient classes.
+- Evaluated using classification reports and confusion matrices for detailed per-class performance.
+- Training involved data augmentation, label smoothing, L2 regularization, and early stopping to prevent overfitting and improve real-world performance.
+
 ## Getting Started
 
 ### Prerequisites
@@ -72,15 +78,9 @@ ComplexNet.ipynb        # Model training notebook
 CNN-Model Description.docx # Model documentation
 ```
 
-## License
-
-MIT License
-
 ## Acknowledgements
 
 - PyTorch, Streamlit, torchvision
 - Ingredient images from various sources
 
 ---
-
-For questions or contributions, open an issue or pull
