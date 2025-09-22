@@ -84,3 +84,5 @@ CNN-Model Description.docx # Model documentation
 - Ingredient images from various sources
 
 ---
+
+For questions or contributions, open an issue or pull request!
